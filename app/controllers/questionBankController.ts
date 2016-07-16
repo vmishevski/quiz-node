@@ -8,5 +8,3 @@ export class QuestionBankController {
     res.send('<h1>Hello!</h1>');
   }
 }
-
-
