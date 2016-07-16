@@ -10,13 +10,14 @@
   "license": "ISC",
   "dependencies": {
     "convict": "^1.4.0",
-    "express": "^4.14.0"
-  },
-  "devDependencies": {
+    "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-nodemon": "^2.1.0",
     "gulp-tslint": "^6.0.1",
     "gulp-typescript": "^2.13.6",
     "tslint": "^3.13.0"
+  },
+  "devDependencies": {
+
   }
 }
