@@ -20,6 +20,7 @@ let config = convict({
     },
     port: {
       doc: 'port to bind',
+      env: 'PORT',
       format: 'port',
       default: 9000
     }
