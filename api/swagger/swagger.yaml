@@ -70,6 +70,116 @@ paths:
             $ref: "#/definitions/ErrorResponse"
         "200":
           description: Success
+  /questionBanks/{identifier}/quizzes:
+    x-swagger-router-controller: quizController
+    get:
+      description: Get quizzes for a question bank
+      operationId: getByQuestionBank
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier for question bank
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Quiz"
+        "400":
+          description: Missing or identifier not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Create new quizz
+      operationId: addQuizz
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier for question bank
+          required: true
+          type: string
+        - name: quizz
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Quiz"
+      responses:
+        "200":
+          description: Success created
+          schema:
+            $ref: "#/definitions/CreatedResponse"
+  /questionBanks/{identifier}/quizzes/{quizId}:
+    put:
+      description: update quiz
+      operationId: updateQuiz
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier for question bank
+          required: true
+          type: string
+        - name: quizId
+          in: path
+          description: Quiz id which is edited
+          required: true
+          type: string
+        - name: quizz
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Quiz"
+      responses:
+        "200":
+          description: Success edit quiz
+          schema:
+            $ref: "#/definitions/Quiz"
+        "404":
+          description: Question bank or quiz not found
+    get:
+      description: get quiz by id
+      operationId: getQuizById
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier for question bank
+          required: true
+          type: string
+        - name: quizId
+          in: path
+          description: Quiz id which is edited
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Quiz found
+          schema:
+            $ref: "#/definitions/Quiz"
+        "404":
+          description: Quiz not found
+    delete:
+      description: remove quiz
+      operationId: removeQuiz
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier for question bank
+          required: true
+          type: string
+        - name: quizId
+          in: path
+          description: Quiz id which is edited
+          required: true
+          type: string
+      responses:
+        "404":
+          description: Quiz not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "200":
+          description: Success
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -86,3 +196,42 @@ definitions:
     properties:
       message:
         type: string
+  Quiz:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      questions:
+        type: array
+        items:
+          $ref: "#/definitions/Question"
+    required:
+      - id
+      - name
+  Question:
+    properties:
+      id:
+        type: string
+      questionDescription:
+        type: string
+      answers:
+        type: array
+        items:
+          $ref: "#/definitions/Answer"
+  Answer:
+    properties:
+      id:
+        type: string
+      answerDescription:
+        type: string
+      isCorrect:
+        type: string
+  CreatedResponse:
+    properties:
+      id:
+        type: string
+    required:
+      - id
