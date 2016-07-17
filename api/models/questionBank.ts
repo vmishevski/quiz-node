@@ -4,20 +4,20 @@
 
 import mongoose = require('mongoose');
 
-let questionBank: any = new mongoose.Schema({
+export let questionBankSchema: any = new mongoose.Schema({
     identifier: String
   });
 
-if (!questionBank.options.toJSON) {
-  questionBank.options.toJSON = {};
+if (!questionBankSchema.options.toJSON) {
+  questionBankSchema.options.toJSON = {};
 }
 
-questionBank.options.toJSON.transform = (doc, ret, c): any => {
+questionBankSchema.options.toJSON.transform = (doc, ret, c): any => {
   delete ret._id;
   return ret;
 };
 
-mongoose.model('QuestionBank', questionBank);
+export let QuestionBankModel = mongoose.model('QuestionBank', questionBankSchema);
 
 export interface QuestionBank extends mongoose.Document {
   identifier: string;

@@ -8,7 +8,7 @@ export let QuizSchema: any = new mongoose.Schema({
   questions: [{type: ObjectId, ref: 'QuestionSchema'}]
 });
 
-mongoose.model('Quiz', QuizSchema);
+export let QuizModel = mongoose.model('Quiz', QuizSchema);
 
 if (!QuizSchema.options.toJSON) {
   QuizSchema.options.toJSON = {};

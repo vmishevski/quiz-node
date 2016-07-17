@@ -101,7 +101,7 @@ paths:
           description: Identifier for question bank
           required: true
           type: string
-        - name: quizz
+        - name: quiz
           in: body
           required: true
           schema:
@@ -209,7 +209,6 @@ definitions:
         items:
           $ref: "#/definitions/Question"
     required:
-      - id
       - name
   Question:
     properties:
@@ -228,7 +227,7 @@ definitions:
       answerDescription:
         type: string
       isCorrect:
-        type: string
+        type: boolean
   CreatedResponse:
     properties:
       id:

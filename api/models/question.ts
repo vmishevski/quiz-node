@@ -3,7 +3,7 @@ import mongoose = require('mongoose');
 let QuestionSchema: any = new mongoose.Schema({
   questionDescription: {type: String, required: true},
   answers: [{
-    id: {type: mongoose.Schema.Types.ObjectId, required: true},
+    // id: {type: mongoose.Schema.Types.ObjectId, required: true},
     answerDescription: {type: String, required: true},
     isCorrect: {type: Boolean, default: false}
   }]
@@ -19,7 +19,7 @@ QuestionSchema.options.toJSON.transform = (doc, ret, c): any => {
   return ret;
 };
 
-mongoose.model('Question', QuestionSchema);
+export let QuestionModel = mongoose.model('Question', QuestionSchema);
 
 export {QuestionSchema};
 

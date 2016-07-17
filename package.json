@@ -8,6 +8,7 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "async": "^2.0.0",
     "body-parser": "^1.15.2",
     "convict": "^1.4.0",
     "debug": "^2.2.0",
@@ -17,6 +18,7 @@
     "gulp-nodemon": "^2.1.0",
     "gulp-tslint": "^6.0.1",
     "gulp-typescript": "^2.13.6",
+    "lodash": "^4.13.1",
     "mongoose": "^4.5.4",
     "swagger-express-mw": "^0.1.0",
     "swagger-tools": "^0.10.1",
