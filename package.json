@@ -1,8 +1,8 @@
 {
-  "name": "quiz-node2",
+  "name": "quiz-node",
   "version": "0.0.1",
   "private": true,
-  "description": "New Swagger API Project",
+  "description": "Quizz service",
   "keywords": [],
   "author": "",
   "license": "",
@@ -10,6 +10,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "convict": "^1.4.0",
+    "debug": "^2.2.0",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "gulp-exec": "^2.1.2",
@@ -22,12 +23,16 @@
     "tslint": "^3.13.0"
   },
   "devDependencies": {
-    "should": "^7.1.0",
+    "chai": "^3.5.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.5.3",
     "supertest": "^1.0.0",
     "typings": "^1.3.1"
   },
   "scripts": {
-    "start": "node app.js",
-    "test": "swagger project test"
+    "postinstall": "typings install",
+    "start": "gulp serve",
+    "test": "swagger project test",
+    "swagger": "swagger project edit"
   }
 }

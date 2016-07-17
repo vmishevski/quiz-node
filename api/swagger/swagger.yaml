@@ -1,7 +1,8 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
+  title: Quiz service
+  description: Http based microservice for quizzes
 # during dev, should point to your local machine
 host: localhost:10000
 # basePath prefixes all resource paths
@@ -18,24 +19,6 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      responses:
-        "200":
-          description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
   /questionBanks:
     x-swagger-router-controller: questionBankController
     post:
@@ -71,16 +54,26 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/QuestionBank"
+    delete:
+      description: Delete question bank by identifier
+      operationId: deleteByIdentifier
+      parameters:
+        - name: identifier
+          in: path
+          description: Identifier to delete
+          required: true
+          type: string
+      responses:
+        "404":
+          description: Question bank not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "200":
+          description: Success
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
   QuestionBank:
     required:
       - identifier
