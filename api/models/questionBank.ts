@@ -5,7 +5,7 @@
 import mongoose = require('mongoose');
 
 let questionBank: any = new mongoose.Schema({
-    identifier: 'string'
+    identifier: String
   });
 
 if (!questionBank.options.toJSON) {
