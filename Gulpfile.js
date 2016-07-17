@@ -8,25 +8,26 @@ var gulp = require('gulp'),
   tslint = require('gulp-tslint');
 
 gulp.task('tslint', function(){
-  gulp.src(['app.ts', 'config/*.ts','app/**/*.ts'])
+  gulp.src(['app.ts', 'config/*.ts','api/**/*.ts'])
     .pipe(tslint({configuration: './tslint.json'}))
-    .pipe(tslint.report({emitError: true}));
+    .pipe(tslint.report({emitError: false}));
+});
+
+gulp.task('copy', function () {
+  return gulp.src(['**/*.yaml', '!node_modules/**/*'])
+    .pipe(gulp.dest('.build/'));
 });
 
 gulp.task('typescript', function() {
   console.log('Compiling typescript');
   return tsProject.src()
-    .pipe(ts(tsProject)).js.pipe(gulp.dest('./.build'))
+    .pipe(ts(tsProject)).js.pipe(gulp.dest('.build/'))
 });
 
-gulp.task('watch', ['tslint'], function() {
-  gulp.watch(['./app.ts', './app/**/*.ts', './config/*.ts'], ['typescript']);
-});
-
-gulp.task('serve', ['tslint', 'typescript'], function () {
+gulp.task('serve', ['copy', 'tslint', 'typescript'], function () {
   nodemon({
     script: '.build/app.js',
-    ext: 'js ts',
-    tasks: ['tslint', 'typescript']
+    ext: 'ts yaml',
+    tasks: ['copy', 'tslint', 'typescript']
   });
 });

@@ -29,6 +29,7 @@ let config = convict({
     host: {
       doc: 'Database host name/IP',
       format: String,
+      env: 'MONGODB_URI',
       default: 'testing'
     },
     name: {

@@ -1,16 +1,29 @@
-/**
- * Created by Voislav on 7/16/2016.
- */
-
+'use strict';
 import express = require('express');
+let saggerExpress = require('swagger-express-mw');
+let swaggerUi = require('swagger-tools/middleware/swagger-ui');
+let app: express.Application = express();
+let bodyParser = require('body-parser');
 import config = require('./config/config');
+import db = require('./api/db/index');
 
-let app = express();
+module.exports = app; // for testing
 
-app.get('/', (req: any, res: any) => {
-  res.send('<h1>Hello World!</h1>');
-});
+app.use(bodyParser.json());
 
-app.listen(config.get('server.port'), () => {
-  console.log('Server listening to localhost:' + config.get('server.port'));
+db.connect();
+require('./api/models/index');
+
+saggerExpress.create({appRoot: __dirname}, (err: any, se: any) => {
+  if (err) { throw err; }
+
+  app.use(swaggerUi(se.runner.swagger));
+
+  // install middleware
+  se.register(app);
+
+  app.listen(config.get('server.port'), () => {
+    console.log('Server listening to localhost:' + config.get('server.port'));
+  });
+
 });

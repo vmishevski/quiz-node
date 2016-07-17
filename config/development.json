@@ -2,5 +2,8 @@
   "server": {
     "port": "10000",
     "ip": "127.0.0.1"
+  },
+  "database":{
+    "host": "mongodb://test:test@ds023245.mlab.com:23245/heroku_2vm6bqrr"
   }
 }
